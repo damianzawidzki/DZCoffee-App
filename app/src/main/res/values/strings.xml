@@ -1,11 +1,8 @@
-    <resources>
-        <string name="app_name">DZCoffee</string>
-        <string name="login_title">Sign in</string>
-        <string name="register_title">Create account</string>
-        <string name="register_subtitle">Customer registration</string>
-
-        <!-- FIX: do NOT use "continue" -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string name="app_name">DZ Café</string>
+        <string name="splash_slogan">Fresh coffee, fresh start ☕</string>
         <string name="btn_continue">Continue</string>
-        <string name="brand_dz_cafe">DZ Café</string>
-        <string name="slogan">Fresh coffee, fresh start ☕</string>
-    </resources>
+        <string name="dz_caf_logo">DZ Café logo</string>
+        <string name="login">Login</string>
+</resources>
