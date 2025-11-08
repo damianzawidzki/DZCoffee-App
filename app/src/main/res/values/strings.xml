@@ -1,8 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <string name="app_name">DZ Café</string>
-        <string name="splash_slogan">Fresh coffee, fresh start ☕</string>
-        <string name="btn_continue">Continue</string>
-        <string name="dz_caf_logo">DZ Café logo</string>
-        <string name="login">Login</string>
+        <string name="app_name">DZ Coffee</string>
+        <string name="login_title">Login to DZ Café</string>
+        <string name="hint_username">Email or Username</string>
+        <string name="hint_password">Password</string>
+        <string name="btn_sign_in">Sign In</string>
+        <string name="no_account">Don\'t have an account?</string>
+        <string name="register_here"> Register here</string>
+        <string name="admin_panel">Admin Panel</string>
+        <string name="manage_dz_caf_system">Manage DZ Café system</string>
+        <string name="todo">TODO</string>
+        <string name="already_have_an_account">Already have an account?</string>
+        <string name="go_back_to_login">Go back to login</string>
+        <string name="password">Password</string>
+        <string name="login_username">Login (username)</string>
+        <string name="email">Email</string>
+        <string name="date_of_birth_dd_mm_yyyy">Date of birth (dd.MM.yyyy)</string>
+        <string name="last_name">Last name</string>
+        <string name="first_name">First name</string>
+        <string name="create_customer_account">Create customer account</string>
+        <string name="confirm_password">Confirm password</string>
+        <string name="register">Register</string>
+        <string name="rt">TODO</string>
+    <string name="manage_admins_and_system">Manage admins and system</string>
+        <string name="dz_caf_menu">DZ Café Menu</string>
 </resources>
