@@ -48,6 +48,7 @@
         <activity android:name=".SuperAdminActivity" />
         <activity android:name=".ProductsActivity" />
         <activity android:name=".ProductDetailActivity" />
+        <activity android:name=".CartActivity" />
 
 
         <!-- If you previously had SplashActivity, it is intentionally removed -->

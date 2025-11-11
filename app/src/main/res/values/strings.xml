@@ -23,4 +23,16 @@
         <string name="rt">TODO</string>
     <string name="manage_admins_and_system">Manage admins and system</string>
         <string name="dz_caf_menu">DZ Café Menu</string>
+    <string name="dz_cafe_menu">DZ Café Menu</string>
+        <string name="from_2_50">from £2.50</string>
+        <string name="item_name">Item name</string>
+        <string name="sign_out">Sign out</string>
+    <string name="clear">Clear</string>
+    <string name="category">Category</string>
+    <string name="_1">1</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="back">Back</string>
+    <string name="medium_1">Medium (+£1)</string>
+    <string name="large_1_5">Large (+£1.5)</string>
+    <string name="small">Small</string>
 </resources>

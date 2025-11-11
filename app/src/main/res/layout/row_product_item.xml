@@ -1,43 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rowProduct"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:gravity="center_vertical"
     android:padding="8dp"
-    android:layout_marginTop="8dp"
-    android:background="#26FFFFFF">
+    android:background="#26FFFFFF"
+    android:layout_marginBottom="6dp">
 
     <ImageView
         android:id="@+id/imgItem"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/coffee_latte" />
+        android:src="@drawable/americano" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_marginStart="8dp">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvItemName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Item name"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"/>
+            android:text="Name"
+            android:textStyle="bold"
+            android:textColor="@android:color/white" />
 
         <TextView
             android:id="@+id/tvItemInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="from £2.50"
-            android:textColor="@android:color/white"
-            android:textSize="12sp"/>
+            android:text="Short info"
+            android:textSize="11sp"
+            android:textColor="#EEEEEE" />
+
+        <TextView
+            android:id="@+id/tvItemPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="from £3.00"
+            android:textSize="11sp"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
     <TextView
@@ -45,7 +52,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Choose"
-        android:textColor="#4A3F35"
-        android:padding="8dp"
-        android:background="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:padding="6dp" />
 </LinearLayout>

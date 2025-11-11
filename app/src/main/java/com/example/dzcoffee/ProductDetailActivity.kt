@@ -1,106 +1,241 @@
 package com.example.dzcoffee
 
 import android.os.Bundle
-import android.widget.*
+import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.Spinner
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 
 class ProductDetailActivity : AppCompatActivity() {
 
-    private var isCoffee = false
-    private var fromPrice = 0.0
-    private lateinit var productId: String
-    private lateinit var productName: String
+    private lateinit var imgProduct: ImageView
+    private lateinit var tvTitle: TextView
+    private lateinit var tvIngredients: TextView
+
+    private lateinit var layoutSize: LinearLayout
+    private lateinit var rgSize: RadioGroup
+    private lateinit var rbSmall: RadioButton
+    private lateinit var rbMedium: RadioButton
+    private lateinit var rbLarge: RadioButton
+
+    private lateinit var layoutMilk: LinearLayout
+    private lateinit var spMilk: Spinner
+
+    private lateinit var layoutSugar: LinearLayout
+    private lateinit var edtSugar: EditText
+
+    private lateinit var edtQuantity: EditText
+    private lateinit var btnAddToCart: MaterialButton
+    private lateinit var btnBack: MaterialButton
+
+    private var productId: String = ""
+    private var productName: String = ""
+    private var category: String = ""
+    private var basePrice: Double = 0.0
     private var imageRes: Int = 0
-    private lateinit var category: String
+    private var isCoffee: Boolean = false
+    private var ingredients: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_detail)
 
-        productId = intent.getStringExtra("id") ?: ""
-        productName = intent.getStringExtra("name") ?: ""
-        fromPrice = intent.getDoubleExtra("fromPrice", 0.0)
-        imageRes = intent.getIntExtra("imageRes", 0)
-        category = intent.getStringExtra("category") ?: "Other"
-        isCoffee = intent.getBooleanExtra("isCoffee", false)
+        bindViews()
+        readIntent()
+        setupUi()
+        setupActions()
+    }
 
-        val img = findViewById<ImageView>(R.id.imgProduct)
-        val tvName = findViewById<TextView>(R.id.tvProductName)
-        val layoutSizes = findViewById<LinearLayout>(R.id.layoutSizes)
-        val rgSizes = findViewById<RadioGroup>(R.id.rgSizes)
-        val rbSmall = findViewById<RadioButton>(R.id.rbSmall)
-        val rbMedium = findViewById<RadioButton>(R.id.rbMedium)
-        val rbLarge = findViewById<RadioButton>(R.id.rbLarge)
-        val tvPrice = findViewById<TextView>(R.id.tvPrice)
-        val btnAdd = findViewById<MaterialButton>(R.id.btnAddToCart)
+    private fun bindViews() {
+        imgProduct = findViewById(R.id.imgProduct)
+        tvTitle = findViewById(R.id.tvDetailTitle)
+        tvIngredients = findViewById(R.id.tvIngredients)
 
-        img.setImageResource(imageRes)
-        tvName.text = productName
+        layoutSize = findViewById(R.id.layoutSize)
+        rgSize = findViewById(R.id.rgSize)
+        rbSmall = findViewById(R.id.rbSmall)
+        rbMedium = findViewById(R.id.rbMedium)
+        rbLarge = findViewById(R.id.rbLarge)
 
-        if (isCoffee) {
-            // Example prices: S = fromPrice, M = +0.40, L = +0.80
-            val priceSmall = fromPrice
-            val priceMedium = fromPrice + 0.40
-            val priceLarge = fromPrice + 0.80
+        layoutMilk = findViewById(R.id.layoutMilk)
+        spMilk = findViewById(R.id.spMilk)
 
-            rbSmall.text = "Small - £${"%.2f".format(priceSmall)}"
-            rbMedium.text = "Medium - £${"%.2f".format(priceMedium)}"
-            rbLarge.text = "Large - £${"%.2f".format(priceLarge)}"
+        layoutSugar = findViewById(R.id.layoutSugar)
+        edtSugar = findViewById(R.id.edtSugar)
 
-            rbSmall.isChecked = true
-            tvPrice.text = "£${"%.2f".format(priceSmall)}"
+        edtQuantity = findViewById(R.id.edtQuantity)
+        btnAddToCart = findViewById(R.id.btnAddToCart)
+        btnBack = findViewById(R.id.btnBack)
+    }
 
-            rgSizes.setOnCheckedChangeListener { _, checkedId ->
-                val price = when (checkedId) {
-                    R.id.rbSmall -> priceSmall
-                    R.id.rbMedium -> priceMedium
-                    R.id.rbLarge -> priceLarge
-                    else -> priceSmall
-                }
-                tvPrice.text = "£${"%.2f".format(price)}"
-            }
+    private fun readIntent() {
+        val i = intent
+        productId = i.getStringExtra("id") ?: ""
+        productName = i.getStringExtra("name") ?: ""
+        category = i.getStringExtra("category") ?: ""
+        // IMPORTANT: use "basePrice" key the same as in ProductsActivity
+        basePrice = i.getDoubleExtra("basePrice", 0.0)
+        imageRes = i.getIntExtra("imageRes", 0)
+        isCoffee = i.getBooleanExtra("isCoffee", false)
+        ingredients = i.getStringExtra("ingredients") ?: ""
+    }
 
-            btnAdd.setOnClickListener {
-                val (sizeLabel, price) = when (rgSizes.checkedRadioButtonId) {
-                    R.id.rbMedium -> "M" to priceMedium
-                    R.id.rbLarge -> "L" to priceLarge
-                    else -> "S" to priceSmall
-                }
+    private fun setupUi() {
+        tvTitle.text = productName
+        imgProduct.setImageResource(imageRes)
 
-                val finalId = "${productId}_$sizeLabel"
-                val finalName = "$productName ($sizeLabel)"
-
-                CartManager.addItem(
-                    Product(
-                        id = finalId,
-                        name = finalName,
-                        category = category,
-                        price = price
-                    )
-                )
-
-                Toast.makeText(this, "$finalName added to cart", Toast.LENGTH_SHORT).show()
-                finish()
-            }
-
+        // ingredients from menu or fallback by category
+        val ingText = if (ingredients.isNotBlank()) {
+            ingredients
         } else {
-            // Not coffee: hide sizes, use single price
-            layoutSizes.visibility = android.view.View.GONE
-            tvPrice.text = "£${"%.2f".format(fromPrice)}"
-
-            btnAdd.setOnClickListener {
-                CartManager.addItem(
-                    Product(
-                        id = productId,
-                        name = productName,
-                        category = category,
-                        price = fromPrice
-                    )
-                )
-                Toast.makeText(this, "$productName added to cart", Toast.LENGTH_SHORT).show()
-                finish()
+            when (category.lowercase()) {
+                "coffee" -> "Freshly brewed coffee, customizable milk and sugar."
+                "snack" -> "Perfect snack to go with your coffee."
+                "dessert" -> "Sweet treat served fresh."
+                else -> ""
             }
         }
+
+        tvIngredients.text = if (ingText.isNotBlank()) "Ingredients: $ingText" else ""
+
+        val allowCoffeeOptions =
+            isCoffee && !productName.contains("espresso", ignoreCase = true)
+
+        if (allowCoffeeOptions) {
+            layoutSize.visibility = View.VISIBLE
+            layoutMilk.visibility = View.VISIBLE
+            layoutSugar.visibility = View.VISIBLE
+            rbSmall.isChecked = true
+        } else if (isCoffee) {
+            // espresso / double espresso – fixed, no options
+            layoutSize.visibility = View.GONE
+            layoutMilk.visibility = View.GONE
+            layoutSugar.visibility = View.GONE
+        } else {
+            // snacks & desserts – no options
+            layoutSize.visibility = View.GONE
+            layoutMilk.visibility = View.GONE
+            layoutSugar.visibility = View.GONE
+        }
+
+        // simple milk options
+        if (spMilk.adapter == null) {
+            val milks = listOf(
+                "No extra milk",
+                "Whole milk",
+                "Oat milk (+£0.20)",
+                "Almond milk (+£0.20)"
+            )
+            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, milks)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spMilk.adapter = adapter
+        }
+
+        edtQuantity.setText("1")
+    }
+
+    private fun setupActions() {
+        btnBack.setOnClickListener { finish() }
+
+        btnAddToCart.setOnClickListener {
+            val qtyText = edtQuantity.text.toString().trim()
+            val quantity = qtyText.toIntOrNull() ?: 0
+            if (quantity <= 0) {
+                Toast.makeText(this, "Enter quantity", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val sel = buildSelection()
+
+            CartManager.addItem(
+                name = productName,
+                category = category,
+                size = sel.size,
+                milk = sel.milk,
+                sugar = sel.sugar,
+                unitPrice = sel.price,
+                imageResId = imageRes,
+                quantity = quantity
+            )
+
+            Toast.makeText(this, "Added to cart", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+    }
+
+    // Holds calculated options
+    private data class Selection(
+        val size: String,
+        val milk: String,
+        val sugar: String,
+        val price: Double
+    )
+
+    private fun buildSelection(): Selection {
+        val cat = category.lowercase()
+
+        // Snacks & desserts: just base price per item
+        if (cat == "snack" || cat == "dessert") {
+            return Selection(
+                size = "",
+                milk = "",
+                sugar = "",
+                price = basePrice
+            )
+        }
+
+        // Espresso / double espresso: fixed
+        if (isCoffee && productName.contains("espresso", ignoreCase = true)) {
+            return Selection(
+                size = "",
+                milk = "",
+                sugar = "",
+                price = basePrice
+            )
+        }
+
+        // Regular coffees with options
+        var sizeLabel = "Small"
+        var price = basePrice
+
+        when (rgSize.checkedRadioButtonId) {
+            R.id.rbMedium -> {
+                sizeLabel = "Medium"
+                price += 1.0
+            }
+            R.id.rbLarge -> {
+                sizeLabel = "Large"
+                price += 1.5
+            }
+            else -> {
+                sizeLabel = "Small"
+            }
+        }
+
+        val milkChoice =
+            if (spMilk.selectedItemPosition > 0) spMilk.selectedItem.toString() else ""
+
+        val sugarText = edtSugar.text.toString().trim()
+        val sugarLabel = if (sugarText.isEmpty()) "0" else sugarText
+
+        val milkLower = milkChoice.lowercase()
+        if (milkLower.contains("oat") || milkLower.contains("almond")) {
+            price += 0.20
+        }
+
+        return Selection(
+            size = sizeLabel,
+            milk = milkChoice,
+            sugar = sugarLabel,
+            price = price
+        )
     }
 }
