@@ -1,44 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_banner_dz">
+    android:background="@drawable/bg_banner_dz"
+    android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/imgLogoSuperAdmin"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
-        android:src="@drawable/ic_dz_logo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"/>
-
-    <TextView
-        android:id="@+id/tvSuperAdminTitle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Super Admin Panel"
-        android:textColor="@android:color/white"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/imgLogoSuperAdmin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"/>
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvSuperAdminSubtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/manage_admins_and_system"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tvSuperAdminTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
+        <!-- Header with logout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SuperAdmin panel"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign out"
+                android:textAllCaps="false"
+                android:textColor="#4A3F35"
+                android:backgroundTint="@android:color/white"/>
+        </LinearLayout>
+
+        <!-- Step 1: find user -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#F5E0C8"
+            android:padding="12dp"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1. Find existing user"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/edtIdentifier"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Username or email"
+                android:layout_marginTop="8dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFindUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Find user"
+                android:textAllCaps="false"
+                android:backgroundTint="@android:color/white"
+                android:textColor="#4A3F35"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/tvFoundUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+
+        <!-- Step 2: admin details + save/remove -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#F5E0C8"
+            android:padding="12dp"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2. Admin details"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/edtAdminFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="First name"
+                android:layout_marginTop="8dp"/>
+
+            <EditText
+                android:id="@+id/edtAdminLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Last name"
+                android:layout_marginTop="8dp"/>
+
+            <EditText
+                android:id="@+id/edtAdminDob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Date of birth (e.g. 2000-05-21)"
+                android:layout_marginTop="8dp"/>
+
+            <EditText
+                android:id="@+id/edtAdminPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone number"
+                android:layout_marginTop="8dp"
+                android:inputType="phone"/>
+
+            <EditText
+                android:id="@+id/edtAdminNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="2"
+                android:gravity="top"
+                android:hint="Notes (optional)"
+                android:layout_marginTop="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSaveAdmin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Save admin"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@android:color/white"
+                    android:textColor="#4A3F35"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRemoveAdmin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="Remove admin"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@android:color/white"
+                    android:textColor="#4A3F35"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Admins list -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Current admins"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="16dp"/>
+
+        <LinearLayout
+            android:id="@+id/layoutAdminList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"/>
+    </LinearLayout>
+</ScrollView>

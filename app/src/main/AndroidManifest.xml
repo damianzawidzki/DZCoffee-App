@@ -39,7 +39,7 @@
             android:name=".RegisterCustomerActivity"
             android:exported="false" />
 
-        <!-- Optional: Home screen after login (placeholder, keep if you have it) -->
+        <!--Home screen after login (placeholder, keep if you have it) -->
         <activity
             android:name=".HomeActivity"
             android:exported="false" />
@@ -48,6 +48,9 @@
         <activity android:name=".SuperAdminActivity" />
         <activity android:name=".ProductsActivity" />
         <activity android:name=".ProductDetailActivity" />
+        <activity android:name=".CartActivity" />
+        <activity android:name=".NotificationsActivity" />
+        <activity android:name=".MyOrdersActivity" />
 
 
         <!-- If you previously had SplashActivity, it is intentionally removed -->

@@ -25,82 +25,133 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Bind views
-        edtLogin = findViewById(R.id.edtLogin)          // username (not email)
-        edtPassword = findViewById(R.id.edtPassword)    // password
+        edtLogin = findViewById(R.id.edtLogin)
+        edtPassword = findViewById(R.id.edtPassword)
         btnSignIn = findViewById(R.id.btnSignIn)
         tvRegister = findViewById(R.id.tvRegister)
 
-        // Go to register screen for customers
+        btnSignIn.setOnClickListener { attemptLogin() }
+
         tvRegister.setOnClickListener {
             startActivity(Intent(this, RegisterCustomerActivity::class.java))
         }
-
-        // Sign in logic
-        btnSignIn.setOnClickListener {
-            val login = edtLogin.text.toString().trim()
-            val password = edtPassword.text.toString()
-
-            if (login.isEmpty()) {
-                edtLogin.error = "Login required"
-                return@setOnClickListener
-            }
-            if (password.isEmpty()) {
-                edtPassword.error = "Password required"
-                return@setOnClickListener
-            }
-
-            signInWithUsername(login, password)
-        }
     }
 
-    private fun signInWithUsername(login: String, password: String) {
+    private fun attemptLogin() {
+        val username = edtLogin.text.toString().trim()
+        val passwordText = edtPassword.text.toString()
+
+        if (username.isEmpty()) {
+            edtLogin.error = "Enter username"
+            return
+        }
+        if (passwordText.isEmpty()) {
+            edtPassword.error = "Enter password"
+            return
+        }
+
         setLoading(true)
 
-        // 1) Find mapping for this username
-        db.collection("usernames").document(login).get()
-            .addOnSuccessListener { doc ->
-                if (!doc.exists()) {
+        // Always treat input as username, then look up email
+        db.collection("usernames")
+            .document(username)
+            .get()
+            .addOnSuccessListener { snap ->
+                val email = snap.getString("email")
+                    ?: snap.getString("userEmail")
+                    ?: snap.getString("mail")
+
+                if (email.isNullOrBlank()) {
                     setLoading(false)
-                    showToast("Invalid login or password")
-                    return@addOnSuccessListener
+                    showToast("Unknown username or no email linked")
+                } else {
+                    signInWithEmail(email, passwordText)
                 }
-
-                val email = doc.getString("email")
-                val role = doc.getString("role") ?: "customer"
-
-                if (email.isNullOrEmpty()) {
-                    setLoading(false)
-                    showToast("Account configuration error (no email)")
-                    return@addOnSuccessListener
-                }
-
-                // 2) Sign in with mapped email + password via FirebaseAuth
-                auth.signInWithEmailAndPassword(email, password)
-                    .addOnSuccessListener {
-                        setLoading(false)
-                        navigateByRole(role)
-                    }
-                    .addOnFailureListener {
-                        setLoading(false)
-                        showToast("Invalid login or password")
-                    }
             }
             .addOnFailureListener { e ->
                 setLoading(false)
-                showToast("Login error: ${e.message}")
+                showToast("Login failed: ${e.message}")
             }
     }
 
-    // Decide where to go based on role from Firestore
-    private fun navigateByRole(role: String) {
+    private fun signInWithEmail(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnSuccessListener {
+                routeAfterLogin()
+            }
+            .addOnFailureListener { e ->
+                setLoading(false)
+                showToast("Login failed: ${e.message}")
+            }
+    }
+
+    private fun routeAfterLogin() {
+        val user = auth.currentUser
+        if (user == null) {
+            setLoading(false)
+            showToast("Login error, please try again")
+            return
+        }
+
+        val uid = user.uid
+
+        // First check Customer collection (role stored there)
+        db.collection("Customer").document(uid)
+            .get()
+            .addOnSuccessListener { customerDoc ->
+                val roleFromCustomer = customerDoc.getString("role")
+
+                if (customerDoc.exists() && !roleFromCustomer.isNullOrBlank()) {
+                    openByRole(roleFromCustomer)
+                } else {
+                    checkAdminCollections(uid)
+                }
+            }
+            .addOnFailureListener {
+                checkAdminCollections(uid)
+            }
+    }
+
+    private fun checkAdminCollections(uid: String) {
+        // Check "admin" collection
+        db.collection("admin").document(uid)
+            .get()
+            .addOnSuccessListener { adminDoc ->
+                if (adminDoc.exists()) {
+                    openByRole("admin")
+                } else {
+                    // Check "superadmins" collection
+                    db.collection("superadmins").document(uid)
+                        .get()
+                        .addOnSuccessListener { superDoc ->
+                            if (superDoc.exists()) {
+                                openByRole("superadmin")
+                            } else {
+                                openByRole("customer")
+                            }
+                        }
+                        .addOnFailureListener {
+                            openByRole("customer")
+                        }
+                }
+            }
+            .addOnFailureListener {
+                openByRole("customer")
+            }
+    }
+
+    private fun openByRole(role: String) {
+        setLoading(false)
+
         val target = when (role.lowercase()) {
             "admin" -> AdminActivity::class.java
             "superadmin" -> SuperAdminActivity::class.java
-            else -> HomeActivity::class.java  // default is customer
+            else -> HomeActivity::class.java   // customer goes to HomeActivity
         }
 
-        startActivity(Intent(this, target))
+        val intent = Intent(this, target)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
         finish()
     }
 
@@ -111,7 +162,7 @@ class LoginActivity : AppCompatActivity() {
         btnSignIn.alpha = if (loading) 0.6f else 1f
     }
 
-    private fun showToast(msg: String)  {
+    private fun showToast(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 }

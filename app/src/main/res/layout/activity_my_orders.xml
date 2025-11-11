@@ -6,69 +6,60 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_banner_dz">
 
-    <ImageView
-        android:id="@+id/imgLogoAdmin"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_dz_logo"
+    <include
+        android:id="@+id/includeHeader"
+        layout="@layout/logo_header"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"
-        android:contentDescription="@string/app_name" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tvAdminTitle"
+        android:id="@+id/tvTitleMyOrders"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Admin panel"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
+        android:text="My orders"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@id/imgLogoAdmin"
-        app:layout_constraintBottom_toBottomOf="@id/imgLogoAdmin"
-        app:layout_constraintStart_toEndOf="@id/imgLogoAdmin"
-        android:layout_marginStart="8dp" />
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/includeHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnLogout"
+        android:id="@+id/btnBackMyOrders"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign out"
+        android:text="Back"
         android:textAllCaps="false"
-        android:textColor="#4A3F35"
         android:backgroundTint="@android:color/white"
-        app:cornerRadius="18dp"
-        app:layout_constraintTop_toTopOf="@id/imgLogoAdmin"
-        app:layout_constraintBottom_toBottomOf="@id/imgLogoAdmin"
+        android:textColor="#4A3F35"
+        app:layout_constraintTop_toTopOf="@id/tvTitleMyOrders"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="16dp" />
+        android:layout_marginEnd="16dp"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnRefresh"
+        android:id="@+id/btnRefreshMyOrders"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Refresh"
         android:textAllCaps="false"
-        android:textColor="#4A3F35"
         android:backgroundTint="@android:color/white"
-        app:cornerRadius="18dp"
-        app:layout_constraintTop_toBottomOf="@id/imgLogoAdmin"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp" />
+        android:textColor="#4A3F35"
+        app:layout_constraintTop_toTopOf="@id/tvTitleMyOrders"
+        app:layout_constraintEnd_toStartOf="@id/btnBackMyOrders"
+        android:layout_marginEnd="12dp"/>
 
     <ScrollView
-        android:id="@+id/scrollOrders"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/btnRefresh"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleMyOrders"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp">
 
         <LinearLayout
-            android:id="@+id/layoutOrders"
+            android:id="@+id/layoutMyOrders"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />

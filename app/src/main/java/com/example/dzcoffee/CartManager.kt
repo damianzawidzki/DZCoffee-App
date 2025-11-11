@@ -1,49 +1,76 @@
 package com.example.dzcoffee
 
-data class Product(
-    val id: String,
+data class CartItem(
     val name: String,
     val category: String,
-    val price: Double
-)
-
-data class CartItem(
-    val product: Product,
-    var quantity: Int
-)
+    val size: String,
+    val milk: String,
+    val sugar: String,
+    val unitPrice: Double,
+    val quantity: Int,
+    val imageResId: Int
+) {
+    val totalPrice: Double
+        get() = unitPrice * quantity
+}
 
 object CartManager {
 
     private val items = mutableListOf<CartItem>()
 
-    fun addItem(product: Product) {
-        val existing = items.find { it.product.id == product.id }
+    fun addItem(
+        name: String,
+        category: String,
+        size: String,
+        milk: String,
+        sugar: String,
+        unitPrice: Double,
+        imageResId: Int,
+        quantity: Int
+    ) {
+        val existing = items.find {
+            it.name == name &&
+                    it.category == category &&
+                    it.size == size &&
+                    it.milk == milk &&
+                    it.sugar == sugar &&
+                    it.unitPrice == unitPrice
+        }
+
         if (existing != null) {
-            existing.quantity += 1
+            val updated = existing.copy(quantity = existing.quantity + quantity)
+            items.remove(existing)
+            items.add(updated)
         } else {
-            items.add(CartItem(product, 1))
+            items.add(
+                CartItem(
+                    name = name,
+                    category = category,
+                    size = size,
+                    milk = milk,
+                    sugar = sugar,
+                    unitPrice = unitPrice,
+                    quantity = quantity,
+                    imageResId = imageResId
+                )
+            )
         }
     }
 
-    fun removeItem(productId: String) {
-        val existing = items.find { it.product.id == productId }
-        if (existing != null) {
-            existing.quantity -= 1
-            if (existing.quantity <= 0) {
-                items.remove(existing)
-            }
-        }
-    }
+    fun getItems(): List<CartItem> = items.toList()
+
+    fun getTotal(): Double = items.sumOf { it.totalPrice }
 
     fun clear() {
         items.clear()
     }
 
-    fun getItems(): List<CartItem> = items.toList()
-
-    fun getTotalPrice(): Double {
-        return items.sumOf { it.product.price * it.quantity }
+    fun removeItemAt(index: Int) {
+        if (index in items.indices) {
+            items.removeAt(index)
+        }
     }
 
-    fun isEmpty(): Boolean = items.isEmpty()
+    val isEmpty: Boolean
+        get() = items.isEmpty()
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="milk_options">
+        <item>No milk</item>
+        <item>Whole milk</item>
+        <item>Skimmed milk</item>
+        <item>Oat milk</item>
+        <item>Soy milk</item>
+    </string-array>
+
+    <string-array name="sugar_options">
+        <item>No sugar</item>
+        <item>1 sugar</item>
+        <item>2 sugars</item>
+        <item>3 sugars</item>
+    </string-array>
+
+</resources>

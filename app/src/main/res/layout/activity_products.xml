@@ -6,45 +6,87 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_banner_dz">
 
-    <ImageView
-        android:id="@+id/imgLogoMenu"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
-        android:src="@drawable/ic_dz_logo"
+    <include
+        android:id="@+id/includeLogo"
+        layout="@layout/logo_header"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvMenuTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/dz_caf_menu"
-        android:textColor="@android:color/white"
-        android:textSize="22sp"
+        android:text="Our menu"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/imgLogoMenu"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/includeLogo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="4dp" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp" />
 
     <ScrollView
-        android:id="@+id/scrollMenu"
+        android:id="@+id/scrollProducts"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/tvMenuTitle"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp">
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp">
 
         <LinearLayout
             android:id="@+id/layoutProducts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"/>
-
+            android:orientation="vertical" />
     </ScrollView>
 
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:background="#80000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cart"
+            android:textAllCaps="false"
+            android:backgroundTint="@android:color/white"
+            android:textColor="#4A3F35" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMyOrders"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="My orders"
+            android:textAllCaps="false"
+            android:backgroundTint="@android:color/white"
+            android:textColor="#4A3F35" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sign out"
+            android:textAllCaps="false"
+            android:backgroundTint="@android:color/white"
+            android:textColor="#4A3F35" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
