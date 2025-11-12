@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity() {
@@ -31,10 +32,14 @@ class LoginActivity : AppCompatActivity() {
         tvRegister = findViewById(R.id.tvRegister)
 
         btnSignIn.setOnClickListener { attemptLogin() }
-
         tvRegister.setOnClickListener {
             startActivity(Intent(this, RegisterCustomerActivity::class.java))
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        // No auto-route here (we do not remember sessions)
     }
 
     private fun attemptLogin() {
@@ -52,10 +57,8 @@ class LoginActivity : AppCompatActivity() {
 
         setLoading(true)
 
-        // Always treat input as username, then look up email
-        db.collection("usernames")
-            .document(username)
-            .get()
+        // Resolve username -> email
+        db.collection("usernames").document(username).get()
             .addOnSuccessListener { snap ->
                 val email = snap.getString("email")
                     ?: snap.getString("userEmail")
@@ -76,9 +79,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun signInWithEmail(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
-            .addOnSuccessListener {
-                routeAfterLogin()
-            }
+            .addOnSuccessListener { routeAfterLogin() }
             .addOnFailureListener { e ->
                 setLoading(false)
                 showToast("Login failed: ${e.message}")
@@ -92,47 +93,25 @@ class LoginActivity : AppCompatActivity() {
             showToast("Login error, please try again")
             return
         }
-
         val uid = user.uid
+        val email = user.email ?: ""
 
-        // First check Customer collection (role stored there)
-        db.collection("Customer").document(uid)
-            .get()
-            .addOnSuccessListener { customerDoc ->
-                val roleFromCustomer = customerDoc.getString("role")
-
-                if (customerDoc.exists() && !roleFromCustomer.isNullOrBlank()) {
-                    openByRole(roleFromCustomer)
+        // Decide only by users/{uid}.role
+        db.collection("users").document(uid).get()
+            .addOnSuccessListener { doc ->
+                val role = doc.getString("role")
+                if (!role.isNullOrBlank()) {
+                    openByRole(role)
                 } else {
-                    checkAdminCollections(uid)
-                }
-            }
-            .addOnFailureListener {
-                checkAdminCollections(uid)
-            }
-    }
-
-    private fun checkAdminCollections(uid: String) {
-        // Check "admin" collection
-        db.collection("admin").document(uid)
-            .get()
-            .addOnSuccessListener { adminDoc ->
-                if (adminDoc.exists()) {
-                    openByRole("admin")
-                } else {
-                    // Check "superadmins" collection
-                    db.collection("superadmins").document(uid)
-                        .get()
-                        .addOnSuccessListener { superDoc ->
-                            if (superDoc.exists()) {
-                                openByRole("superadmin")
-                            } else {
-                                openByRole("customer")
-                            }
-                        }
-                        .addOnFailureListener {
-                            openByRole("customer")
-                        }
+                    // If profile missing, create minimal customer profile
+                    val fallback = mapOf(
+                        "uid" to uid,
+                        "email" to email,
+                        "role" to "customer",
+                        "updatedAt" to FieldValue.serverTimestamp()
+                    )
+                    db.collection("users").document(uid).set(fallback)
+                        .addOnCompleteListener { openByRole("customer") }
                 }
             }
             .addOnFailureListener {
@@ -142,13 +121,11 @@ class LoginActivity : AppCompatActivity() {
 
     private fun openByRole(role: String) {
         setLoading(false)
-
         val target = when (role.lowercase()) {
             "admin" -> AdminActivity::class.java
             "superadmin" -> SuperAdminActivity::class.java
-            else -> HomeActivity::class.java   // customer goes to HomeActivity
+            else -> HomeActivity::class.java
         }
-
         val intent = Intent(this, target)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)

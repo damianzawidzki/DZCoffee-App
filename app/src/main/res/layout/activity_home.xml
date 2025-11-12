@@ -1,115 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:background="@drawable/bg_banner_dz">
 
-    <ImageView
-        android:id="@+id/imgLogoHome"
-        android:layout_width="140dp"
-        android:layout_height="80dp"
-        android:src="@drawable/ic_dz_logo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp"
-        android:contentDescription="@string/app_name" />
-
-    <TextView
-        android:id="@+id/tvWelcome"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome to DZ Café"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/imgLogoHome"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="8dp" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tvSubtitleHome"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="What would you like to do?"
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/tvWelcome"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="8dp" />
+        <!-- Header with your DZ logo (uses existing layout) -->
+        <include layout="@layout/logo_header" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnOpenMenu"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Open menu"
-        android:textAllCaps="false"
-        android:textColor="#4A3F35"
-        android:backgroundTint="@android:color/white"
-        app:cornerRadius="22dp"
-        app:layout_constraintTop_toBottomOf="@id/tvSubtitleHome"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="24dp" />
+        <!-- Welcome line populated by HomeActivity.kt -->
+        <TextView
+            android:id="@+id/tvWelcomeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnMyOrders"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="My orders"
-        android:textAllCaps="false"
-        android:textColor="#4A3F35"
-        android:backgroundTint="@android:color/white"
-        app:cornerRadius="22dp"
-        app:layout_constraintTop_toBottomOf="@id/btnOpenMenu"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="12dp" />
+        <!-- Quick actions -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginBottom="12dp">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnNotifications"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Notifications"
-        android:textAllCaps="false"
-        android:textColor="#4A3F35"
-        android:backgroundTint="@android:color/white"
-        app:cornerRadius="22dp"
-        app:layout_constraintTop_toBottomOf="@id/btnMyOrders"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="12dp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOpenMenu"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="Open menu"
+                android:textAllCaps="false"
+                android:backgroundTint="@android:color/white"
+                android:textColor="#4A3F35"
+                android:layout_marginEnd="8dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnLogout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Sign out"
-        android:textAllCaps="false"
-        android:textColor="#4A3F35"
-        android:backgroundTint="@android:color/white"
-        app:cornerRadius="22dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="24dp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnViewCart"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="My cart"
+                android:textAllCaps="false"
+                android:backgroundTint="@android:color/white"
+                android:textColor="#4A3F35" />
+        </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Optional section title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/featured_today"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Simple placeholder container; you can inflate cards into it if needed -->
+        <LinearLayout
+            android:id="@+id/homeContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="@android:color/transparent" />
+
+    </LinearLayout>
+</ScrollView>

@@ -40,4 +40,6 @@
     <string name="_0_00">£0.00</string>
     <string name="_01_nov_2025_10_30">01 Jan 2025, 10:30</string>
     <string name="pending">Pending</string>
+    <string name="items_in_this_category">Items in this category</string>
+    <string name="featured_today">Featured today</string>
 </resources>

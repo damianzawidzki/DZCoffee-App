@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:padding="10dp"
+    android:layout_marginBottom="8dp">
+
+    <TextView
+        android:id="@+id/tvItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textStyle="bold"
+        android:textColor="#4E342E" />
+
+    <TextView
+        android:id="@+id/tvItemCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category"
+        android:textColor="#6D4C41"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp" />
+
+    <TextView
+        android:id="@+id/tvItemInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingredients"
+        android:textColor="#6D4C41"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp" />
+
+    <TextView
+        android:id="@+id/tvItemPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="£0.00"
+        android:textStyle="bold"
+        android:textColor="#4E342E"
+        android:layout_marginTop="4dp" />
+
+    <TextView
+        android:id="@+id/tvItemBadges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="coffee • options"
+        android:textSize="11sp"
+        android:textColor="#6D4C41"
+        android:layout_marginTop="2dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEditItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Edit"
+            android:textAllCaps="false"
+            android:textColor="#4A3F35"
+            android:backgroundTint="#F5E0C8" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDeleteItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="Delete"
+            android:textAllCaps="false"
+            android:textColor="#4A3F35"
+            android:backgroundTint="#F5E0C8" />
+    </LinearLayout>
+</LinearLayout>

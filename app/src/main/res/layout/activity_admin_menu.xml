@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_banner_dz"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvTitleMenuAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manage menu"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filter by category"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="8dp" />
+
+    <Spinner
+        android:id="@+id/spFilterCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@android:drawable/btn_dropdown" />
+
+    <!-- Form for add/edit -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#F5E0C8"
+        android:padding="12dp"
+        android:layout_marginTop="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Item details"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:layout_marginTop="8dp" />
+
+        <Spinner
+            android:id="@+id/spCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/edtPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Base price (e.g. 3.50)"
+            android:inputType="numberDecimal"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/edtIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minLines="2"
+            android:hint="Ingredients"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/edtImageKey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Image key (e.g. latte, cheesecake)"
+            android:layout_marginTop="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPickImage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Pick image"
+                android:textAllCaps="false"
+                android:textColor="#4A3F35"
+                android:backgroundTint="@android:color/white" />
+
+            <ImageView
+                android:id="@+id/imgPreview"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_dz_coffee_cup"
+                android:scaleType="centerCrop" />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/chkIsCoffee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Is coffee?"
+            android:layout_marginTop="8dp" />
+
+        <CheckBox
+            android:id="@+id/chkAllowOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Allow options (size/milk/sugar)?"
+            android:layout_marginTop="4dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSaveItem"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Add item"
+                android:textAllCaps="false"
+                android:textColor="#4A3F35"
+                android:backgroundTint="@android:color/white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnClearForm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="Clear form"
+                android:textAllCaps="false"
+                android:textColor="#4A3F35"
+                android:backgroundTint="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvItemsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/items_in_this_category"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="12dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="4dp">
+
+        <LinearLayout
+            android:id="@+id/layoutMenuList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+</LinearLayout>

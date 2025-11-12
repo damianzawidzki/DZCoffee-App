@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.dzcoffee">
 
-    <!-- Basic permissions (internet for Firebase/HTTP, network state checks) -->
+    <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="DZ Café"
+        android:label="DZCoffee"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Material3.DayNight.NoActionBar">
+        android:theme="@style/Theme.DZCoffee">
 
-        <!-- Launcher activity (now MainActivity, not Splash) -->
+        <!-- MainActivity -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -26,34 +25,61 @@
         </activity>
 
         <!-- Login screen -->
-        <activity android:name=".LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
 
-        <!-- Customer registration screen -->
+        <!-- Customer registration -->
         <activity
             android:name=".RegisterCustomerActivity"
             android:exported="false" />
 
-        <!--Home screen after login (placeholder, keep if you have it) -->
+        <!-- Admin registration -->
+        <activity
+            android:name=".RegisterAdminActivity"
+            android:exported="false" />
+
+        <!-- Home screen after login -->
         <activity
             android:name=".HomeActivity"
             android:exported="false" />
 
-        <activity android:name=".AdminActivity" />
-        <activity android:name=".SuperAdminActivity" />
-        <activity android:name=".ProductsActivity" />
-        <activity android:name=".ProductDetailActivity" />
-        <activity android:name=".CartActivity" />
-        <activity android:name=".NotificationsActivity" />
-        <activity android:name=".MyOrdersActivity" />
+        <!-- Admin panel -->
+        <activity
+            android:name=".AdminActivity"
+            android:exported="false" />
 
+        <!-- Admin panel -->
+        <activity
+            android:name=".AdminMenuActivity"
+            android:exported="false" />
 
-        <!-- If you previously had SplashActivity, it is intentionally removed -->
+        <!-- Superadmin -->
+        <activity
+            android:name=".SuperAdminActivity"
+            android:exported="false" />
+
+        <!-- Customer screen-->
+        <activity
+            android:name=".ProductsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ProductDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".CartActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".MyOrdersActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".NotificationsActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
