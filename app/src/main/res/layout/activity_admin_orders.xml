@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_banner_dz"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:id="@+id/layoutAdminOrders"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/logo_header" />
+
+        <Button
+            android:id="@+id/btnBackAdminOrders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:backgroundTint="@android:color/white"
+            android:textColor="#4A3F35" />
+
+        <Button
+            android:id="@+id/btnRefreshOrders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Refresh orders"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@android:color/white"
+            android:textColor="#4A3F35" />
+
+        <LinearLayout
+            android:id="@+id/layoutOrders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="12dp" />
+
+    </LinearLayout>
+
+</ScrollView>

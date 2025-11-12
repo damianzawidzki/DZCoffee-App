@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/bg_banner_dz">
+
+    <include layout="@layout/logo_header" />
+
+    <Button
+        android:id="@+id/btnBackPayment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:backgroundTint="@android:color/white"
+        android:textColor="#4A3F35" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Payment"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="12dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select payment method:"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="12dp" />
+
+    <Spinner
+        android:id="@+id/spPaymentMethod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_input_field"
+        android:padding="8dp" />
+
+    <Button
+        android:id="@+id/btnPay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pay now"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@android:color/white"
+        android:textColor="#4A3F35" />
+
+</LinearLayout>

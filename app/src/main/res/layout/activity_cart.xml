@@ -1,120 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_banner_dz">
+    android:background="@drawable/bg_banner_dz"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <!-- Logo -->
-    <ImageView
-        android:id="@+id/imgLogoCart"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_dz_logo"
-        android:contentDescription="@string/app_name"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"/>
+    <include layout="@layout/logo_header" />
 
-    <!-- Title -->
-    <TextView
-        android:id="@+id/tvCartTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Your cart"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@id/imgLogoCart"
-        app:layout_constraintBottom_toBottomOf="@id/imgLogoCart"
-        app:layout_constraintStart_toEndOf="@id/imgLogoCart"
-        android:layout_marginStart="8dp"/>
-
-    <!-- Back button -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnBackCart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        android:textAllCaps="false"
-        android:textColor="#4A3F35"
-        android:backgroundTint="@android:color/white"
-        app:cornerRadius="18dp"
-        app:layout_constraintTop_toTopOf="@id/imgLogoCart"
-        app:layout_constraintBottom_toBottomOf="@id/imgLogoCart"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="16dp"/>
-
-    <!-- Scroll with cart items -->
     <ScrollView
-        android:id="@+id/scrollCart"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/imgLogoCart"
-        app:layout_constraintBottom_toTopOf="@id/bottomBar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp">
+        android:layout_weight="1">
 
         <LinearLayout
             android:id="@+id/layoutCartItems"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"/>
+            android:orientation="vertical" />
     </ScrollView>
 
-    <!-- Bottom bar: total + buttons -->
-    <LinearLayout
-        android:id="@+id/bottomBar"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/tvTotal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="12dp"
-        android:background="#80000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:text="Total: £0.00"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="end"
+        android:layout_marginTop="8dp" />
 
-        <TextView
-            android:id="@+id/tvTotal"
+    <TextView
+        android:id="@+id/tvPaymentTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Payment method"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp" />
+
+    <RadioGroup
+        android:id="@+id/rgPaymentMethod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbPayInCafe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total: £0.00"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:text="Pay in cafe" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <RadioButton
+            android:id="@+id/rbCardOnPickup"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="8dp">
+            android:text="Card on pickup"
+            android:layout_marginStart="12dp" />
+    </RadioGroup>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnClear"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Clear"
-                android:textAllCaps="false"
-                android:textColor="#4A3F35"
-                android:backgroundTint="@android:color/white"
-                app:cornerRadius="18dp"
-                android:layout_marginEnd="8dp"/>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnPlaceOrder"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Place order"
-                android:textAllCaps="false"
-                android:textColor="#4A3F35"
-                android:backgroundTint="@android:color/white"
-                app:cornerRadius="18dp"/>
-        </LinearLayout>
-    </LinearLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnPlaceOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Place order"
+        android:layout_marginTop="12dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnClear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Clear cart"
+        android:layout_marginTop="8dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBackCart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>
+

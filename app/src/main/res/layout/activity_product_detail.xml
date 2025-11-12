@@ -1,198 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_banner_dz">
 
-    <include
-        android:id="@+id/includeLogo"
-        layout="@layout/logo_header"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/imgProduct"
-        android:layout_width="0dp"
-        android:layout_height="140dp"
-        android:layout_margin="16dp"
-        android:scaleType="centerCrop"
-        android:background="#26FFFFFF"
-        app:layout_constraintTop_toBottomOf="@id/includeLogo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/tvDetailTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Product name"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/imgProduct"
-        app:layout_constraintStart_toStartOf="@id/imgProduct"
-        app:layout_constraintEnd_toEndOf="@id/imgProduct" />
-
-    <TextView
-        android:id="@+id/tvIngredients"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Ingredients"
-        android:textSize="12sp"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@id/tvDetailTitle"
-        app:layout_constraintStart_toStartOf="@id/imgProduct"
-        app:layout_constraintEnd_toEndOf="@id/imgProduct" />
-
-    <!-- Size -->
     <LinearLayout
-        android:id="@+id/layoutSize"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/tvIngredients"
-        app:layout_constraintStart_toStartOf="@id/imgProduct"
-        app:layout_constraintEnd_toEndOf="@id/imgProduct">
+        android:padding="16dp">
+
+        <include layout="@layout/logo_header" />
+
+        <ImageView
+            android:id="@+id/imgProduct"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop" />
 
         <TextView
+            android:id="@+id/tvDetailTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Size"
+            android:text="Title"
             android:textColor="@android:color/white"
-            android:textStyle="bold" />
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp" />
 
-        <RadioGroup
-            android:id="@+id/rgSize"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/rbSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/small" />
-
-            <RadioButton
-                android:id="@+id/rbMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/medium_1" />
-
-            <RadioButton
-                android:id="@+id/rbLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/large_1_5" />
-        </RadioGroup>
-    </LinearLayout>
-
-    <!-- Milk -->
-    <LinearLayout
-        android:id="@+id/layoutMilk"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/layoutSize"
-        app:layout_constraintStart_toStartOf="@id/imgProduct"
-        app:layout_constraintEnd_toEndOf="@id/imgProduct">
-
+        <!-- description / ingredients -->
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Milk"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
-
-        <Spinner
-            android:id="@+id/spMilk"
+            android:id="@+id/tvIngredients"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <!-- Sugar -->
-    <LinearLayout
-        android:id="@+id/layoutSugar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/layoutMilk"
-        app:layout_constraintStart_toStartOf="@id/imgProduct"
-        app:layout_constraintEnd_toEndOf="@id/imgProduct">
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sugar (tsp)"
-            android:textColor="@android:color/white" />
+            android:text="Description"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp" />
 
-        <EditText
-            android:id="@+id/edtSugar"
-            android:layout_width="60dp"
+        <!-- SIZE -->
+        <LinearLayout
+            android:id="@+id/layoutSize"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:inputType="number"
-            android:text="0"
-            android:background="@drawable/bg_input_field" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:layout_marginTop="12dp">
 
-    <!-- Quantity -->
-    <LinearLayout
-        android:id="@+id/layoutQuantity"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/layoutSugar"
-        app:layout_constraintStart_toStartOf="@id/imgProduct"
-        app:layout_constraintEnd_toEndOf="@id/imgProduct">
+            <TextView
+                android:id="@+id/tvSizeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Size"
+                android:textColor="@android:color/white" />
 
-        <TextView
-            android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/rgSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Small" />
+
+                <RadioButton
+                    android:id="@+id/rbMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Medium"
+                    android:layout_marginStart="12dp" />
+
+                <RadioButton
+                    android:id="@+id/rbLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Large"
+                    android:layout_marginStart="12dp" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <!-- MILK -->
+        <LinearLayout
+            android:id="@+id/layoutMilk"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Quantity"
-            android:textColor="@android:color/white" />
+            android:orientation="vertical"
+            android:layout_marginTop="12dp">
 
+            <TextView
+                android:id="@+id/tvMilkLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Milk"
+                android:textColor="@android:color/white" />
+
+            <Spinner
+                android:id="@+id/spMilk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- SUGAR -->
+        <LinearLayout
+            android:id="@+id/layoutSugar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:id="@+id/tvSugarLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sugar"
+                android:textColor="@android:color/white" />
+
+            <EditText
+                android:id="@+id/edtSugar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="0-5" />
+        </LinearLayout>
+
+        <!-- QUANTITY -->
         <EditText
             android:id="@+id/edtQuantity"
-            android:layout_width="60dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:inputType="number"
-            android:text="@string/_1"
-            android:background="@drawable/bg_input_field" />
+            android:hint="Quantity"
+            android:layout_marginTop="14dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAddToCart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add to Cart"
+            android:layout_marginTop="14dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:layout_marginTop="8dp" />
+
     </LinearLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnAddToCart"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/add_to_cart"
-        android:textAllCaps="false"
-        android:backgroundTint="#FFFFFF"
-        android:textColor="#4A3F35"
-        app:layout_constraintTop_toBottomOf="@id/layoutQuantity"
-        app:layout_constraintStart_toStartOf="@id/imgProduct"
-        app:layout_constraintEnd_toEndOf="@id/imgProduct" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnBack"
-        android:layout_width="185dp"
-        android:layout_height="62dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="#FFFFFF"
-        android:text="@string/back"
-        android:textAllCaps="false"
-        android:textColor="#4A3F35"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/imgProduct" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

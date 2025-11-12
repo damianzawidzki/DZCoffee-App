@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    tools:context=".ui.admin.AdminMenuActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Screen title -->
+        <TextView
+            android:id="@+id/tvAdminMenuTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Manage menu"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Product name"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/etProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="e.g. Latte"
+            android:inputType="textCapWords"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/darker_gray"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Price -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price (£)"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/etProductPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="e.g. 3.50"
+            android:inputType="numberDecimal"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/darker_gray"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginBottom="12dp" />
+
+        <!-- product Description -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/etProductDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Short description"
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:maxLines="4"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/darker_gray"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Checkbox: -->
+        <CheckBox
+            android:id="@+id/chkCoffee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Is coffee?"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Checkbox -->
+        <CheckBox
+            android:id="@+id/chkOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Allow options (milk/sugar)?"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Add/Save product -->
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add / Save item"
+            android:textAllCaps="false"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Refresh list -->
+        <Button
+            android:id="@+id/btnRefreshAdminMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Refresh menu list"
+            android:textAllCaps="false"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnGoToOrders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Go to orders"
+            android:textAllCaps="false"
+            android:layout_marginBottom="8dp" />
+
+    </LinearLayout>
+
+</ScrollView>

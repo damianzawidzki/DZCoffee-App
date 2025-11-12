@@ -6,53 +6,56 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_banner_dz">
 
-    <include
-        android:id="@+id/includeHeader"
-        layout="@layout/logo_header"
+    <ImageView
+        android:id="@+id/imgLogoMyOrders"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_dz_logo"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tvTitleMyOrders"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My orders"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/includeHeader"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnBackMyOrders"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        android:textAllCaps="false"
-        android:backgroundTint="@android:color/white"
-        android:textColor="#4A3F35"
-        app:layout_constraintTop_toTopOf="@id/tvTitleMyOrders"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="16dp"/>
+        android:layout_marginTop="24dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnRefreshMyOrders"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/layoutTopButtonsMyOrders"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Refresh"
-        android:textAllCaps="false"
-        android:backgroundTint="@android:color/white"
-        android:textColor="#4A3F35"
-        app:layout_constraintTop_toTopOf="@id/tvTitleMyOrders"
-        app:layout_constraintEnd_toStartOf="@id/btnBackMyOrders"
-        android:layout_marginEnd="12dp"/>
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/imgLogoMyOrders"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBackMyOrders"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Back"
+            android:textAllCaps="false"
+            android:backgroundTint="@android:color/white"
+            android:textColor="#4A3F35"
+            app:cornerRadius="20dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRefreshMyOrders"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Refresh"
+            android:textAllCaps="false"
+            android:backgroundTint="@android:color/white"
+            android:textColor="#4A3F35"
+            app:cornerRadius="20dp"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/tvTitleMyOrders"
+        app:layout_constraintTop_toBottomOf="@id/layoutTopButtonsMyOrders"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,3 +69,4 @@
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

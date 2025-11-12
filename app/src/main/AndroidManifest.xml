@@ -1,59 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.dzcoffee">
-
-    <!-- Basic permissions (internet for Firebase/HTTP, network state checks) -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
+        android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
-        android:label="DZ Café"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Material3.DayNight.NoActionBar">
 
-        <!-- Launcher activity (now MainActivity, not Splash) -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <!-- Login screen -->
-        <activity android:name=".LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <!-- AUTH -->
+        <activity android:name=".ui.auth.LoginActivity" android:exported="false"/>
+        <activity android:name=".ui.auth.RegisterCustomerActivity" android:exported="false"/>
 
-        <!-- Customer registration screen -->
+        <!-- CUSTOMER -->
+        <activity android:name=".ui.customer.HomeActivity" android:exported="false"/>
+        <activity android:name=".ui.customer.ProductsActivity" android:exported="false"/>
+        <activity android:name=".ui.customer.ProductDetailActivity" android:exported="false"/>
+        <activity android:name=".ui.customer.cart.CartActivity" android:exported="false"/>
+
+        <!-- ADMIN -->
+        <activity android:name=".ui.admin.AdminActivity" android:exported="false"/>
+        <activity android:name=".ui.admin.AdminMenuActivity" android:exported="false"/>
+        <activity android:name=".ui.admin.AdminFeedbackActivity"
+            android:exported="false"/>
         <activity
-            android:name=".RegisterCustomerActivity"
+            android:name=".ui.admin.AdminOrderActivity"
             android:exported="false" />
 
-        <!--Home screen after login (placeholder, keep if you have it) -->
-        <activity
-            android:name=".HomeActivity"
-            android:exported="false" />
-
-        <activity android:name=".AdminActivity" />
-        <activity android:name=".SuperAdminActivity" />
-        <activity android:name=".ProductsActivity" />
-        <activity android:name=".ProductDetailActivity" />
-        <activity android:name=".CartActivity" />
-        <activity android:name=".NotificationsActivity" />
-        <activity android:name=".MyOrdersActivity" />
-
-
-        <!-- If you previously had SplashActivity, it is intentionally removed -->
     </application>
-
 </manifest>

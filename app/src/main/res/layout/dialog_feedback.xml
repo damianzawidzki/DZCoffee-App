@@ -1,33 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="20dp">
+    android:orientation="vertical" android:padding="16dp"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="How would you rate this order?"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp"/>
-
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:numStars="5"
-        android:stepSize="1.0"
-        android:layout_marginBottom="12dp"/>
-
-    <EditText
-        android:id="@+id/edtFeedbackComment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minLines="3"
-        android:gravity="top"
-        android:hint="Optional comment"
-        android:background="@drawable/bg_input_field"
-        android:padding="8dp"/>
+    <TextView android:text="Rate us" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <RatingBar android:id="@+id/ratingBar" android:numStars="5" android:stepSize="0.5"
+        android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp"/>
+    <EditText android:id="@+id/edtComment" android:hint="Comment (optional)" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp"/>
+    <Button android:id="@+id/btnSend" android:text="Send" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp"/>
 </LinearLayout>
