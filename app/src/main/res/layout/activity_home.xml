@@ -45,10 +45,27 @@
         android:textColor="#4A3F35"/>
 
     <Button
+        android:id="@+id/btnRateUs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rate us"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@android:color/white"
+        android:textColor="#4A3F35"/>
+
+    <Button
         android:id="@+id/btnNotifications"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Notifications"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@android:color/white"
+        android:textColor="#4A3F35"/>
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign out"
         android:layout_marginTop="8dp"
         android:backgroundTint="@android:color/white"
         android:textColor="#4A3F35"/>

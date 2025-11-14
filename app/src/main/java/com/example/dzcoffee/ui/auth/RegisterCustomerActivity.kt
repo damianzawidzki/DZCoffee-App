@@ -2,153 +2,132 @@ package com.example.dzcoffee.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dzcoffee.R
-import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
-// Register screen for customer
 class RegisterCustomerActivity : AppCompatActivity() {
+
+    private lateinit var auth: FirebaseAuth
+    private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
 
     private lateinit var edtFirstName: EditText
     private lateinit var edtLastName: EditText
     private lateinit var edtDob: EditText
     private lateinit var edtEmail: EditText
     private lateinit var edtLoginName: EditText
-    private lateinit var edtPassword: EditText
+    private lateinit var edtPasswordReg: EditText
     private lateinit var edtConfirmPassword: EditText
-    private lateinit var btnRegister: MaterialButton
-    private lateinit var tvGoLogin: TextView
-
-    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
-    private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
+    private lateinit var btnRegisterCustomer: Button   // works also if view is MaterialButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_customer)
+
+        auth = FirebaseAuth.getInstance()
 
         edtFirstName = findViewById(R.id.edtFirstName)
         edtLastName = findViewById(R.id.edtLastName)
         edtDob = findViewById(R.id.edtDob)
         edtEmail = findViewById(R.id.edtEmail)
         edtLoginName = findViewById(R.id.edtLoginName)
-        edtPassword = findViewById(R.id.edtPasswordReg)
+        edtPasswordReg = findViewById(R.id.edtPasswordReg)
         edtConfirmPassword = findViewById(R.id.edtConfirmPassword)
-        btnRegister = findViewById(R.id.btnRegisterCustomer)
-        tvGoLogin = findViewById(R.id.tvGoLogin)
+        btnRegisterCustomer = findViewById(R.id.btnRegisterCustomer)
 
-        btnRegister.setOnClickListener { handleRegister() }
-
-        tvGoLogin.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
+        btnRegisterCustomer.setOnClickListener { doRegister() }
     }
 
-    private fun handleRegister() {
+    private fun doRegister() {
         val firstName = edtFirstName.text.toString().trim()
         val lastName = edtLastName.text.toString().trim()
         val dob = edtDob.text.toString().trim()
         val email = edtEmail.text.toString().trim()
-        val login = edtLoginName.text.toString().trim()
-        val password = edtPassword.text.toString().trim()
-        val confirm = edtConfirmPassword.text.toString().trim()
+        val loginName = edtLoginName.text.toString().trim()  // username for login
+        val password = edtPasswordReg.text.toString().trim()
+        val confirmPassword = edtConfirmPassword.text.toString().trim()
 
-        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() ||
-            login.isEmpty() || password.isEmpty()
+        if (firstName.isEmpty() || lastName.isEmpty() ||
+            email.isEmpty() || loginName.isEmpty() || password.isEmpty()
         ) {
-            showToast("Please fill required fields")
+            Toast.makeText(this, "Please fill all required fields", Toast.LENGTH_SHORT).show()
             return
         }
 
-        if (password != confirm) {
-            edtConfirmPassword.error = "Passwords do not match"
+        if (password.length < 6) {
+            Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show()
             return
         }
 
-        btnRegister.isEnabled = false
+        if (password != confirmPassword) {
+            Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-        // Check username uniqueness
-        val usernamesRef = db.collection("usernames").document(login)
-        usernamesRef.get()
-            .addOnSuccessListener { doc ->
-                if (doc.exists()) {
-                    btnRegister.isEnabled = true
-                    edtLoginName.error = "This login is already taken"
-                } else {
-                    createCustomerAuth(firstName, lastName, dob, email, login, password)
-                }
-            }
-            .addOnFailureListener {
-                btnRegister.isEnabled = true
-                showToast("Failed to check username")
-            }
-    }
+        btnRegisterCustomer.isEnabled = false
 
-    // Create FirebaseAuth user and Firestore profile
-    private fun createCustomerAuth(
-        firstName: String,
-        lastName: String,
-        dob: String,
-        email: String,
-        login: String,
-        password: String
-    ) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener { result ->
                 val uid = result.user?.uid
                 if (uid == null) {
-                    btnRegister.isEnabled = true
-                    showToast("Registration failed")
+                    btnRegisterCustomer.isEnabled = true
+                    Toast.makeText(this, "Registration error: missing user id", Toast.LENGTH_SHORT).show()
                     return@addOnSuccessListener
                 }
 
-                val profile = hashMapOf(
+                // 1) Save customer profile in "Customer" collection
+                val customerData = hashMapOf(
                     "uid" to uid,
                     "firstName" to firstName,
                     "lastName" to lastName,
                     "dob" to dob,
+                    "loginName" to loginName,
                     "email" to email,
-                    "login" to login,
-                    "role" to "customer",
                     "createdAt" to FieldValue.serverTimestamp()
                 )
 
-                val batch = db.batch()
-                val usersRef = db.collection("users").document(uid)
-                val usernamesRef = db.collection("usernames").document(login)
+                db.collection("Customer").document(uid)
+                    .set(customerData)
+                    .addOnFailureListener { e ->
+                        Toast.makeText(
+                            this,
+                            e.message ?: "Failed to save customer data",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
 
-                batch.set(usersRef, profile)
-                val usernameDoc = hashMapOf(
+                // 2) Save username mapping for login (username OR email)
+                val usernameData = hashMapOf(
                     "email" to email,
                     "role" to "customer",
                     "uID" to uid
                 )
-                batch.set(usernamesRef, usernameDoc)
 
-                batch.commit()
-                    .addOnSuccessListener {
-                        showToast("Customer registered")
-                        startActivity(Intent(this, LoginActivity::class.java))
-                        finish()
-                    }
+                db.collection("usernames").document(loginName)
+                    .set(usernameData)
                     .addOnFailureListener { e ->
-                        btnRegister.isEnabled = true
-                        showToast(e.message ?: "Failed to save user")
+                        Toast.makeText(
+                            this,
+                            e.message ?: "Failed to save username mapping",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
+
+                Toast.makeText(this, "Account created", Toast.LENGTH_SHORT).show()
+                btnRegisterCustomer.isEnabled = true
+
+                // Go back to login screen
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
             }
             .addOnFailureListener { e ->
-                btnRegister.isEnabled = true
-                showToast(e.message ?: "Registration failed")
+                btnRegisterCustomer.isEnabled = true
+                Toast.makeText(this, e.message ?: "Registration failed", Toast.LENGTH_LONG).show()
             }
-    }
-
-    private fun showToast(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 }

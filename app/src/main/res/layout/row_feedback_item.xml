@@ -1,10 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:padding="8dp"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:padding="10dp"
+    android:layout_marginBottom="8dp">
 
-    <TextView android:id="@+id/tvEmail" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-    <RatingBar android:id="@+id/ratingBar" style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content" android:layout_height="wrap_content" android:numStars="5" android:stepSize="0.5"/>
-    <TextView android:id="@+id/tvComment" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tvFeedbackTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="5.0★ from user"
+        android:textStyle="bold"
+        android:textColor="#4A3F35"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tvFeedbackBody"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Comment text"
+        android:textColor="#4A3F35"
+        android:textSize="13sp"
+        android:layout_marginTop="4dp" />
+
+    <TextView
+        android:id="@+id/tvFeedbackDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:textColor="#777777"
+        android:textSize="11sp"
+        android:layout_marginTop="4dp" />
 </LinearLayout>

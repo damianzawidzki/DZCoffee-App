@@ -1,68 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_banner_dz">
+    android:background="@drawable/bg_banner_dz"
+    android:padding="12dp">
 
-    <TextView
-        android:id="@+id/tvNotificationsTitle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Notifications"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.414"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnBackNotifications"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        android:textAllCaps="false"
-        android:textColor="#4A3F35"
-        android:backgroundTint="@android:color/white"
-        app:cornerRadius="18dp"
-        app:layout_constraintTop_toTopOf="@id/tvNotificationsTitle"
-        app:layout_constraintBottom_toBottomOf="@id/tvNotificationsTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="16dp" />
+        <include layout="@layout/logo_header" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnMarkAllRead"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mark all read"
-        android:textAllCaps="false"
-        android:textColor="#4A3F35"
-        android:backgroundTint="@android:color/white"
-        app:cornerRadius="18dp"
-        app:layout_constraintTop_toTopOf="@id/tvNotificationsTitle"
-        app:layout_constraintBottom_toBottomOf="@id/tvNotificationsTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="16dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
 
-    <ScrollView
-        android:id="@+id/scrollNotifications"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="16dp"
-        app:layout_constraintTop_toBottomOf="@id/tvNotificationsTitle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBackNotifications"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Back"
+                android:textAllCaps="false"
+                android:backgroundTint="@android:color/white"
+                android:textColor="#4A3F35" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRefreshNotifications"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="Refresh"
+                android:textAllCaps="false"
+                android:backgroundTint="@android:color/white"
+                android:textColor="#4A3F35" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layoutNotifications"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+            android:orientation="vertical"
+            android:layout_marginTop="12dp" />
+    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

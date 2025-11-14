@@ -3,26 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@android:color/white"
     android:padding="10dp"
-    android:layout_marginBottom="8dp"
-    android:background="#F5E0C8">
+    android:layout_marginBottom="8dp">
 
     <TextView
-        android:id="@+id/tvNotifTitle"
+        android:id="@+id/tvNotificationTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Notification title"
+        android:text="Title"
         android:textStyle="bold"
-        android:textColor="#4E342E"
-        android:textSize="14sp" />
+        android:textColor="#4A3F35"
+        android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/tvNotifBody"
+        android:id="@+id/tvNotificationMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Date · Message preview"
-        android:textColor="#6D4C41"
-        android:textSize="12sp"
+        android:text="Message"
+        android:textColor="#4A3F35"
+        android:textSize="13sp"
         android:layout_marginTop="4dp" />
 
+    <TextView
+        android:id="@+id/tvNotificationDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:textColor="#777777"
+        android:textSize="11sp"
+        android:layout_marginTop="4dp" />
 </LinearLayout>

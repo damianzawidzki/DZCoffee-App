@@ -43,4 +43,6 @@
     <string name="items_in_this_category">Items in this category</string>
     <string name="featured_today">Featured today</string>
     <string name="feedback_center">Feedback center</string>
+    <string name="mback">Back</string>
+    <string name="refresh">Refresh</string>
 </resources>

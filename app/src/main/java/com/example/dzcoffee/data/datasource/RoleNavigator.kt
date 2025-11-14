@@ -38,11 +38,11 @@ object RoleNavigator {
             return
         }
 
-        // If only email known, try Customer/admin/superadmins
+
         tryCustomerByEmail(activity, email)
     }
 
-    // ----- helpers -----
+
 
     private fun tryCustomerByEmail(activity: Activity, email: String?) {
         if (email.isNullOrBlank()) {
@@ -99,7 +99,7 @@ object RoleNavigator {
         activity.finish()
     }
 
-    // Optional convenience:
+
     fun goCurrentUser(activity: Activity) {
         val u = FirebaseAuth.getInstance().currentUser
         go(activity, u?.uid, u?.email)

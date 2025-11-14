@@ -6,40 +6,28 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_banner_dz">
 
-    <ImageView
-        android:id="@+id/imgLogoAdmin"
-        android:layout_width="140dp"
-        android:layout_height="80dp"
-        android:src="@drawable/ic_dz_logo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp" />
-
-    <TextView
-        android:id="@+id/tvAdminTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Admin panel"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/imgLogoAdmin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
-
     <LinearLayout
-        android:id="@+id/layoutButtons"
+        android:id="@+id/layoutAdminRoot"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/tvAdminTitle"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="24dp">
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <include layout="@layout/logo_header" />
+
+        <TextView
+            android:id="@+id/tvAdminTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin panel"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnManageMenu"
@@ -47,8 +35,9 @@
             android:layout_height="wrap_content"
             android:text="Manage menu"
             android:textAllCaps="false"
-            android:textColor="#4A3F35"
+            android:layout_marginTop="24dp"
             android:backgroundTint="@android:color/white"
+            android:textColor="#4A3F35"
             app:cornerRadius="22dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -57,21 +46,21 @@
             android:layout_height="wrap_content"
             android:text="Manage orders"
             android:textAllCaps="false"
-            android:textColor="#4A3F35"
+            android:layout_marginTop="12dp"
             android:backgroundTint="@android:color/white"
-            app:cornerRadius="22dp"
-            android:layout_marginTop="12dp" />
+            android:textColor="#4A3F35"
+            app:cornerRadius="22dp" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnFeedback"
+            android:id="@+id/btnAdminFeedback"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Feedback"
+            android:text="View feedback"
             android:textAllCaps="false"
-            android:textColor="#4A3F35"
+            android:layout_marginTop="12dp"
             android:backgroundTint="@android:color/white"
-            app:cornerRadius="22dp"
-            android:layout_marginTop="12dp" />
+            android:textColor="#4A3F35"
+            app:cornerRadius="22dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogoutAdmin"

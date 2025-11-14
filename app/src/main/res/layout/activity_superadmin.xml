@@ -1,153 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_banner_dz"
-    android:fillViewport="true">
+    android:background="@drawable/bg_banner_dz">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/layoutSuperAdminRoot"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:gravity="center_horizontal"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/imgLogoSuperAdmin"
+            android:layout_width="140dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_dz_logo"
+            android:layout_marginBottom="8dp" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/tvSuperAdminTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Super Admin Panel"
-            android:textSize="22sp"
-            android:textStyle="bold"
+            android:text="Super admin"
             android:textColor="@android:color/white"
-            android:gravity="center"
-            android:layout_marginBottom="16dp" />
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp" />
 
-        <EditText
-            android:id="@+id/etFirstName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="First name"
-            android:background="@drawable/bg_input_field" />
-
-        <EditText
-            android:id="@+id/etLastName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Last name"
-            android:background="@drawable/bg_input_field" />
-
-        <EditText
-            android:id="@+id/etBirthDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Date of birth"
-            android:background="@drawable/bg_input_field" />
-
-        <EditText
-            android:id="@+id/etPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Phone"
-            android:inputType="phone"
-            android:background="@drawable/bg_input_field" />
-
-        <EditText
-            android:id="@+id/etLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Login"
-            android:background="@drawable/bg_input_field" />
-
-        <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:background="@drawable/bg_input_field" />
-
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:background="@drawable/bg_input_field" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="12dp"
-            android:weightSum="4">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnAddAdmin"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Add"
-                android:textAllCaps="false"
-                android:backgroundTint="@android:color/white"
-                android:textColor="#4A3F35" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnEditAdmin"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp"
-                android:text="Edit"
-                android:textAllCaps="false"
-                android:backgroundTint="@android:color/white"
-                android:textColor="#4A3F35" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnDeleteAdmin"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp"
-                android:text="Delete"
-                android:textAllCaps="false"
-                android:backgroundTint="@android:color/white"
-                android:textColor="#4A3F35" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnRefreshAdmins"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp"
-                android:text="Refresh"
-                android:textAllCaps="false"
-                android:backgroundTint="@android:color/white"
-                android:textColor="#4A3F35" />
-        </LinearLayout>
-
+        <!-- BUTTON 1: MANAGE ADMIN PANEL -->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSignOut"
+            android:id="@+id/btnManageAdminPanel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manage admin panel"
+            android:textAllCaps="false"
+            android:backgroundTint="@android:color/white"
+            android:textColor="#4A3F35"
+            app:cornerRadius="22dp" />
+
+        <!-- BUTTON 2: REGISTER ADMIN -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRegisterAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register admin"
+            android:textAllCaps="false"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@android:color/white"
+            android:textColor="#4A3F35"
+            app:cornerRadius="22dp" />
+
+        <!-- small logout button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogoutSuperAdmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sign out"
             android:textAllCaps="false"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="24dp"
             android:backgroundTint="@android:color/white"
-            android:textColor="#4A3F35" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Current admins:"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="16dp" />
-
-        <LinearLayout
-            android:id="@+id/listAdmins"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:textColor="#4A3F35"
+            app:cornerRadius="22dp" />
 
     </LinearLayout>
-</ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

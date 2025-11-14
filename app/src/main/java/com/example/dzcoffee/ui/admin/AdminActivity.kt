@@ -14,20 +14,21 @@ class AdminActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin)
 
-        val btnMenu = findViewById<MaterialButton>(R.id.btnManageMenu)
-        val btnOrders = findViewById<MaterialButton>(R.id.btnManageOrders)
-        val btnFeedback = findViewById<MaterialButton>(R.id.btnFeedback)
+        // Buttons from activity_admin.xml
+        val btnManageMenu = findViewById<MaterialButton>(R.id.btnManageMenu)
+        val btnManageOrders = findViewById<MaterialButton>(R.id.btnManageOrders)
+        val btnAdminFeedback = findViewById<MaterialButton>(R.id.btnAdminFeedback)
         val btnLogout = findViewById<MaterialButton>(R.id.btnLogoutAdmin)
 
-        btnMenu.setOnClickListener {
+        btnManageMenu.setOnClickListener {
             startActivity(Intent(this, AdminMenuActivity::class.java))
         }
 
-        btnOrders.setOnClickListener {
+        btnManageOrders.setOnClickListener {
             startActivity(Intent(this, AdminOrdersActivity::class.java))
         }
 
-        btnFeedback.setOnClickListener {
+        btnAdminFeedback.setOnClickListener {
             startActivity(Intent(this, AdminFeedbackActivity::class.java))
         }
 
@@ -38,3 +39,4 @@ class AdminActivity : AppCompatActivity() {
         }
     }
 }
+

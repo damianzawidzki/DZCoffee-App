@@ -10,7 +10,7 @@
         android:theme="@style/Theme.Material3.DayNight.NoActionBar">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.auth.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -27,15 +27,19 @@
         <activity android:name=".ui.customer.ProductsActivity" android:exported="false"/>
         <activity android:name=".ui.customer.ProductDetailActivity" android:exported="false"/>
         <activity android:name=".ui.customer.cart.CartActivity" android:exported="false"/>
-
+        <activity android:name=".ui.customer.PaymentActivity"/>
         <!-- ADMIN -->
         <activity android:name=".ui.admin.AdminActivity" android:exported="false"/>
         <activity android:name=".ui.admin.AdminMenuActivity" android:exported="false"/>
         <activity android:name=".ui.admin.AdminFeedbackActivity"
             android:exported="false"/>
         <activity
-            android:name=".ui.admin.AdminOrderActivity"
+            android:name=".ui.admin.AdminOrdersActivity"
             android:exported="false" />
+        <activity
+            android:name=".NotificationsActivity"
+            android:exported="false" />
+
 
     </application>
 </manifest>

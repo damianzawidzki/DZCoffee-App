@@ -7,28 +7,29 @@
 
     <LinearLayout
         android:id="@+id/layoutAdminOrders"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <include layout="@layout/logo_header" />
 
         <Button
             android:id="@+id/btnBackAdminOrders"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Back"
             android:backgroundTint="@android:color/white"
-            android:textColor="#4A3F35" />
+            android:textColor="#4A3F35"
+            android:layout_marginTop="8dp" />
 
         <Button
             android:id="@+id/btnRefreshOrders"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Refresh orders"
-            android:layout_marginTop="8dp"
+            android:text="Refresh"
             android:backgroundTint="@android:color/white"
-            android:textColor="#4A3F35" />
+            android:textColor="#4A3F35"
+            android:layout_marginTop="8dp" />
 
         <LinearLayout
             android:id="@+id/layoutOrders"
@@ -40,3 +41,4 @@
     </LinearLayout>
 
 </ScrollView>
+
