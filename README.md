@@ -145,7 +145,7 @@ Feedback:
 ## ⚙️ How to Run the Project
 
 1. Clone repository:
-git clone https://github.com/pepik13/CafeApp.git
+https://github.com/damianzawidzki/DZCoffee-App.git
 
 2. Open in Android Studio
 
