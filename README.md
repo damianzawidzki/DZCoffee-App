@@ -19,6 +19,31 @@ The purpose of this project is to demonstrate:
 
 ---
 
+## Skills Demonstrated
+
+- Android Application Development
+- Kotlin Programming
+- Firebase Authentication
+- Firebase Firestore
+- User Interface Design
+- Shopping Cart Implementation
+- User Login and Registration
+- Mobile Navigation
+- CRUD Operations
+- Git & GitHub Version Control
+
+## Application Features
+
+- User Registration
+- User Login
+- Product Catalogue
+- Product Details
+- Shopping Cart
+- Order Management
+- Firebase Authentication
+- Firestore Database
+- Responsive User Interface
+  
 ## 🚀 Features
 
 ### 👤 Customer
